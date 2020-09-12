@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/screenshot/screenshot.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/screenshot
-# date:       2020-09-11T19:27:52+0200
+# date:       2020-09-12T15:00:39+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to make screenshots with maim
@@ -34,6 +34,9 @@ screenshot_preview="sxiv $screenshot_directory/$screenshot_file"
     || execute="$screenshot_command"
 
 case "$1" in
+    -h | --help)
+        printf "%s\n" "$help"
+        ;;
     -desk)
         $execute && $screenshot_preview
         ;;
@@ -46,6 +49,6 @@ case "$1" in
         ;;
     *)
         printf "%s\n" "$help"
-        exit 0
+        exit 1
         ;;
 esac
