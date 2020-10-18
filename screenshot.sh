@@ -3,7 +3,13 @@
 # path:       /home/klassiker/.local/share/repos/screenshot/screenshot.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/screenshot
-# date:       2020-09-12T15:00:39+0200
+# date:       2020-10-18T11:34:35+0200
+
+# config
+screenshot_directory=$HOME/Schreibtisch
+screenshot_file=screenshot-$(date +"%FT%T%z").png
+screenshot_command="maim -B -u $screenshot_directory/$screenshot_file"
+screenshot_preview="sxiv $screenshot_directory/$screenshot_file"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to make screenshots with maim
@@ -23,11 +29,6 @@ help="$script [-h/--help] -- script to make screenshots with maim
     $script -window
     $script -window 5
     $script -select"
-
-screenshot_directory=$HOME/Schreibtisch
-screenshot_file=screenshot-$(date +"%FT%T%z").png
-screenshot_command="maim -B -u $screenshot_directory/$screenshot_file"
-screenshot_preview="sxiv $screenshot_directory/$screenshot_file"
 
 [ -n "$2" ] \
     && execute="$screenshot_command -d $2" \
