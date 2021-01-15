@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/screenshot/screenshot.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/screenshot
-# date:       2020-10-30T23:12:41+0100
+# path:   /home/klassiker/.local/share/repos/screenshot/screenshot.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/screenshot
+# date:   2021-01-15T13:55:52+0100
 
 # config
 screenshot_directory=$HOME/Schreibtisch
