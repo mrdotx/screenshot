@@ -3,10 +3,10 @@
 # path:   /home/klassiker/.local/share/repos/screenshot/screenshot.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/screenshot
-# date:   2021-01-15T13:55:52+0100
+# date:   2021-07-11T11:56:42+0200
 
 # config
-screenshot_directory=$HOME/Schreibtisch
+screenshot_directory=$HOME/Desktop
 screenshot_file=screenshot-$(date +"%FT%T%z").png
 screenshot_command="maim -B -u $screenshot_directory/$screenshot_file"
 screenshot_preview="sxiv $screenshot_directory/$screenshot_file"
