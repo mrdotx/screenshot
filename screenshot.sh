@@ -3,55 +3,51 @@
 # path:   /home/klassiker/.local/share/repos/screenshot/screenshot.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/screenshot
-# date:   2021-07-11T11:56:42+0200
+# date:   2021-07-16T19:35:19+0200
 
 # config
-screenshot_directory=$HOME/Desktop
-screenshot_file=screenshot-$(date +"%FT%T%z").png
-screenshot_command="maim -B -u $screenshot_directory/$screenshot_file"
-screenshot_preview="sxiv $screenshot_directory/$screenshot_file"
+screenshot_directory="$HOME/Desktop"
+screenshot_file="$screenshot_directory/screenshot-$(date +"%FT%T%z").png"
+screenshot_command="maim -B -u -q $screenshot_file"
+screenshot_preview="sxiv $screenshot_file"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to make screenshots with maim
   Usage:
-    $script [-desk/-window/-select] [seconds]
+    $script [--desktop/--window/--selection] [seconds]
 
   Settings:
-    [-desk]   = full screen screenshot
-    [-window] = active window screenshot
-    [-select] = selection screenshot
-    [seconds] = the option -desk and -window can be used
-                with delay in seconds to make screenshot
+    [--desktop]   = full screen screenshot
+    [--window]    = active window screenshot
+    [--selection] = selection screenshot
+    [seconds]     = the option -desk and -window can be used
+                    with delay in seconds to make screenshot
 
   Examples:
-    $script -desk
-    $script -desk 5
-    $script -window
-    $script -window 5
-    $script -select"
+    $script --desktop
+    $script --window
+    $script --selection
+    $script --desktop 5
+    $script --window 5"
 
 [ -n "$2" ] \
-    && execute="$screenshot_command -d $2" \
-    || execute="$screenshot_command"
+    && screenshot_command="$screenshot_command -d $2"
 
 case "$1" in
-    -h | --help)
-        printf "%s\n" "$help"
+    --desktop)
+        $screenshot_command \
+            && $screenshot_preview &
         ;;
-    -desk)
-        $execute \
-            && $screenshot_preview
+    --window)
+        $screenshot_command --window "$(xdotool getactivewindow)" \
+            && $screenshot_preview &
         ;;
-    -window)
-        $execute -i "$(xdotool getactivewindow)" \
-            && $screenshot_preview
-        ;;
-    -select)
+    --selection)
         notify-send \
             "maim" \
-            "select an area or window to screenshot" \
-        & $screenshot_command -s \
-        && $screenshot_preview
+            "select an area or a window for the screenshot"
+        $screenshot_command --select \
+            && $screenshot_preview &
         ;;
     *)
         printf "%s\n" "$help"
